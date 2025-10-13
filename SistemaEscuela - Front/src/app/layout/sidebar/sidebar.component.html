@@ -1,0 +1,119 @@
+<!-- Sidebar estilo TailAdmin -->
+<aside
+  class="bg-white dark:bg-gray-900 h-full min-h-screen transition-all duration-300 border-r border-gray-200 dark:border-gray-800 flex flex-col fixed lg:relative z-50"
+  [class]="isExpanded ? 
+    'w-72 translate-x-0' : 
+    '-translate-x-full lg:translate-x-0 lg:w-20'">
+
+  <!-- Contenido del sidebar - ANCHO CONSISTENTE -->
+  <div class="flex flex-col h-full bg-white dark:bg-gray-900 w-72 lg:w-full overflow-hidden">
+    
+    <!-- Logo Section -->
+    <div class="flex items-center px-6 py-6 flex-shrink-0">
+      <a href="/EduCenter/" class="flex items-center gap-3">
+        <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+          <span class="text-white font-bold text-sm">S</span>
+        </div>
+        <span *ngIf="isExpanded" class="text-xl font-bold text-gray-800 dark:text-white">SchoolTrack</span>
+      </a>
+    </div>
+
+    <!-- Navigation Menu -->
+    <nav class="flex-1 flex flex-col min-h-0">
+      <div class="flex-1 overflow-y-auto px-4 py-0 
+                  [-ms-overflow-style:none] 
+                  [scrollbar-width:none] 
+                  [&::-webkit-scrollbar]:hidden">
+        
+        <!-- Separador para secciones -->
+        <div *ngIf="isExpanded" class="mt-0 mb-4">
+          <span class="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Menú</span>
+        </div>
+        
+        <ul class="space-y-1.5">
+          <li *ngFor="let nav of navItems" class="group">
+            <!-- Items con submenú -->
+            <div *ngIf="nav.subItems">
+              <button (click)="toggleSubmenu(nav.name)"
+                class="flex items-center justify-between w-full px-3 py-2.5 rounded-lg transition-all duration-200 group"
+                [class]="isParentActive(nav) ? 
+                        'bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400' : 
+                        'text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400'">
+
+                <span class="flex items-center gap-3 min-w-0">
+                  <span class="text-lg flex-shrink-0" [innerHTML]="nav.icon"></span>
+                  <span *ngIf="isExpanded" class="text-sm font-medium truncate">{{ nav.name }}</span>
+                </span>
+
+                <svg *ngIf="isExpanded" class="w-4 h-4 flex-shrink-0 transform transition-transform duration-200" 
+                  [class]="isParentActive(nav) ? 
+                         'text-blue-600 rotate-180' : 
+                         'text-gray-400 group-hover:text-blue-600'" 
+                  [class.rotate-180]="openSubmenu === nav.name"
+                  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+
+              <!-- Submenú -->
+              <div *ngIf="openSubmenu === nav.name && isExpanded"
+                class="ml-4 mt-1 space-y-1 border-l-2 border-gray-100 dark:border-gray-700 pl-4">
+                <a *ngFor="let sub of nav.subItems" [routerLink]="sub.path"
+                   (click)="onMobileItemClick()"
+                  class="block px-3 py-2 text-sm rounded-lg transition-colors"
+                  [class]="isSubItemActive(sub) ? 
+                     'bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400' : 
+                     'text-gray-600 dark:text-gray-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400'">
+                  {{ sub.name }}
+                </a>
+              </div>
+            </div>
+
+            <!-- Items simples -->
+            <a *ngIf="!nav.subItems && nav.path" [routerLink]="nav.path"
+               (click)="onMobileItemClick()"
+              class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 group"
+              [class]="isActive(nav.path) ? 
+                 'bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400' : 
+                 'text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400'">
+
+              <span class="text-lg" [innerHTML]="nav.icon"></span>
+              <span *ngIf="isExpanded" class="text-sm font-medium">{{ nav.name }}</span>
+            </a>
+          </li>
+        </ul>
+
+        <!-- Separador para secciones -->
+        <div *ngIf="isExpanded" class="mt-8 mb-4">
+          <span class="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">OTHERS</span>
+        </div>
+
+        <!-- Otros items -->
+        <ul class="space-y-1.5" *ngIf="isExpanded">
+          <li>
+            <a (click)="onMobileItemClick()"
+              class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200 group cursor-pointer">
+              <span class="text-lg">📊</span>
+              <span class="text-sm font-medium">Charts</span>
+            </a>
+          </li>
+          <li>
+            <a (click)="onMobileItemClick()"
+              class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200 group cursor-pointer">
+              <span class="text-lg">🎨</span>
+              <span class="text-sm font-medium">UI Elements</span>
+            </a>
+          </li>
+          <li>
+            <a (click)="onMobileItemClick()"
+              class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200 group cursor-pointer">
+              <span class="text-lg">🔐</span>
+              <span class="text-sm font-medium">Authentication</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <!-- En cualquier lugar dentro del sidebar -->
+</aside>

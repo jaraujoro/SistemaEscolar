@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Registro - Sistema Escolar</title>
+        <link th:href="@{/css/login-usuario.css}" rel="stylesheet">
+    </head>
+    <body>
+        <div class="login-container">
+            <!-- Imagen local (puedes guardarla en static/img/logo.png) -->
+
+            <div class="sub-container">
+
+                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135755.png" alt="Logo Escuela">
+
+                <h2>Registro al Sistema Escolar</h2>
+
+                <form method="post">
+                    <div class="form-group">
+                        <label for="txt_nombre_usu">Nombre(s)</label>
+                        <input type="text" id="txt_nombre_usu" name="txt_nombre_usu" placeholder="Ingresa tu nombre completo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="txt_apellido_usu">Apellido(s)</label>
+                        <input type="text" id="txt_apellido_usu" name="txt_apellido_usu" placeholder="Ingresa tu apellido completo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="txt_dni_usu">Dni</label>
+                        <input type="number" id="txt_dni_usu" name="txt_dni_usu" placeholder="Ingresa tu número de dni" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="txt_email_usu">E-mail</label>
+                        <input type="text" id="txt_email_usu" name="txt_email_usu" placeholder="Ingresa tu correo electronico" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="txt_login_usu">Login - Usuario</label>
+                        <input type="text" id="txt_login_usu" name="txt_login_usu" placeholder="Ingresa tu usuario" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="txt_pass_login_usu">Contraseña</label>
+                        <input type="password" id="txt_pass_login_usu" name="txt_pass_login_usu" placeholder="Ingresa tu contraseña" required>
+                    </div>
+                    
+                    <div class ="form-group">
+                        <button type="button" class="btn btn-registro-usuario">Registrar Usuario</button>
+                    </div>
+                </form>
+                
+                <div class="links">
+                    <a th:href="@{/login-usuario}">Iniciar Sesión</a>
+                </div>
+
+                <footer>
+                    © 2025 Sistema Escolar - Todos los derechos reservados ®
+                </footer>
+            </div>
+
+        </div>
+        <script type="text/javascript" th:src="@{/js/login-usuario.js}"></script>
+    </body>
+</html>

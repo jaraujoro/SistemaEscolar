@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login - Sistema Escolar</title>
+        <!-- Vinculamos el CSS externo -->
+        <link th:href="@{/css/login-usuario.css}" rel="stylesheet">
+    </head>
+    <body>
+        <div class="login-container">
+            <!-- Imagen local (puedes guardarla en static/img/logo.png) -->
+
+            <div class="sub-container">
+
+                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135755.png" alt="Logo Escuela">
+
+                <h2>Ingreso al Sistema Escolar</h2>
+
+                <form th:action="@{/valid-login}" method="post">
+                    <div class="form-group">
+                        <label for="usuario">Login - Usuario</label>
+                        <input type="text" id="txt_usuario_login" name="txt_usuario_login" placeholder="Ingresa tu usuario" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Contraseña</label>
+                        <input type="password" id="txt_password_login" name="txt_password_login" placeholder="Ingresa tu contraseña" required>
+                    </div>
+                    <div class ="form-group">
+                        <button type="submit" class="btn">Iniciar Sesión</button>
+                    </div>
+                </form>
+
+                <div class="links">
+                    <a href="#">¿Olvidaste tu contraseña?</a>
+                    <a th:href="@{/registro-usuario}">Crear una cuenta</a>
+                </div>
+
+                <footer>
+                    © 2025 Sistema Escolar - Todos los derechos reservados ®
+                </footer>
+            </div>
+
+        </div>
+    </body>
+</html>
