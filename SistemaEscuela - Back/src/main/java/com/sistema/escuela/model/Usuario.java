@@ -5,8 +5,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name= "usuario", schema ="ADM")
 public class Usuario {
 
     @Id
@@ -14,9 +16,10 @@ public class Usuario {
     private Long id_usuario;
     private String nombre_usuario;
     private String apellido_usuario;
+    @Column(nullable = false, unique = true)
     private String dni_usuario;
     private String email_usuario;
-    @Column(name = "login_usuario") // mantiene la columna DB igual
+    @Column(name = "login_usuario", nullable = false, unique = true) // mantiene la columna DB igual
     private String loginUsuario;       // atributo Java en camelCase
     @Column(name = "password_usuario")
     private String passwordUsuario;

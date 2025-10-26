@@ -1,50 +1,49 @@
-<header class="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 px-6 py-1">
+<header class="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 px-4 sm:px-6 py-2">
   <div class="flex items-center justify-between">
-
+    
     <!-- Botón para toggle del sidebar -->
     <button (click)="toggleMenu()"
-      class="items-center justify-center w-10 h-10 text-gray-500 border-gray-200 rounded-lg z-99999 dark:border-gray-800 flex dark:text-gray-400 lg:h-11 lg:w-11 xl:border hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-
-      <!-- Icono de hamburguesa - Siempre visible en desktop, en móvil solo cuando sidebar cerrado -->
-      <svg class="w-5 h-5" [class.hidden]="isSidebarExpanded" [class.lg:block]="true" fill="none" stroke="currentColor"
-        viewBox="0 0 24 24">
+      class="flex items-center justify-center w-10 h-10 text-gray-500 border-gray-200 rounded-lg dark:border-gray-800 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+      
+      <!-- Icono de hamburguesa - Visible en móvil cuando sidebar cerrado, en desktop siempre -->
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
       </svg>
-
-      <!-- Icono de X - Solo visible en móvil cuando sidebar abierto -->
-      <!-- <svg class="w-5 h-5 lg:hidden" [class.hidden]="!isSidebarExpanded" fill="none" stroke="currentColor"
-        viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-      </svg> -->
     </button>
 
-    <!-- Resto del código del perfil de usuario -->
+    <!-- Logo o título (opcional para móvil) -->
+    <div class="md:hidden text-lg font-semibold text-gray-900 dark:text-white">
+      EduCenter
+    </div>
+
+    <!-- Perfil de usuario -->
     <div class="flex items-center gap-2">
       <!-- Botón del perfil -->
       <div class="relative">
         <button (click)="toggleUserDropdown()"
-          class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+          class="flex items-center gap-2 md:gap-3 p-1 md:p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+          
           <!-- Avatar -->
           <div
-            class="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
-            <span class="text-white font-semibold text-sm">MC</span>
+            class="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+            <span class="text-white font-semibold text-xs md:text-sm">MC</span>
           </div>
 
           <!-- Información del usuario (solo visible en desktop) -->
-          <div class="hidden lg:block text-left">
+          <div class="hidden md:block text-left">
             <p class="text-sm font-medium text-gray-900 dark:text-white">Musharof Chowdhury</p>
             <p class="text-xs text-gray-500 dark:text-gray-400">randomuser@pimjo.com</p>
           </div>
 
-          <!-- Icono de flecha -->
-          <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <!-- Icono de flecha (solo visible en desktop) -->
+          <svg class="hidden md:block w-4 h-4 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
           </svg>
         </button>
 
         <!-- Dropdown Menu -->
         <div *ngIf="isUserDropdownOpen"
-          class="absolute right-0 mt-2 w-64 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-2 z-50">
+          class="absolute right-0 mt-2 w-56 md:w-64 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-2 z-50">
 
           <!-- Menu Items -->
           <div class="py-2">
@@ -69,9 +68,11 @@
               </svg>
               <span>Configuración</span>
             </a>
-          </div>        
+          </div>
+          
           <!-- Divider -->
           <div class="border-t border-gray-100 dark:border-gray-700 my-2"></div>
+          
           <!-- Bottom Actions -->
           <div class="py-2">
             <!-- Logout -->

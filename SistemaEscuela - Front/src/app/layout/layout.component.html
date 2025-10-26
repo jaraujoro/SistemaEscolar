@@ -1,5 +1,5 @@
 <div class="flex h-screen">
-  <!-- Sidebar primero -->
+  <!-- Sidebar -->
   <app-sidebar [isExpanded]="isSidebarExpanded" [isMobile]="isMobile" (sidebarToggle)="onMenuToggle()">
   </app-sidebar>
 
@@ -7,14 +7,16 @@
   <div *ngIf="isMobile && isSidebarExpanded" class="fixed inset-0 bg-black/50 z-40 lg:hidden" (click)="onMenuToggle()">
   </div>
 
-
-  <!-- Contenido principal después -->
-  <div class="flex-1 flex flex-col min-h-0 w-full transition-all duration-300" [class.lg:ml-0]="!isSidebarExpanded">
-    <app-header (menuToggle)="onMenuToggle()" [isSidebarExpanded]="isSidebarExpanded">
+  <!-- Contenido principal - SIN MÁRGENES EN EL CONTENEDOR -->
+  <div class="flex-1 flex flex-col min-h-0 w-full">
+    
+    <!-- Header normal -->
+    <app-header (menuToggle)="onMenuToggle()" [isSidebarExpanded]="isSidebarExpanded"
+                class="w-full">
     </app-header>
 
     <!-- Contenido principal -->
-    <main class="flex-1 overflow-auto p-6 bg-gray-50 dark:bg-gray-800">
+    <main class="flex-1 overflow-auto p-4 lg:p-6 bg-gray-50 dark:bg-gray-800">
       <router-outlet></router-outlet>
     </main>
   </div>

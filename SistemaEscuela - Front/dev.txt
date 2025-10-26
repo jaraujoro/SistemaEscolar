@@ -1,0 +1,24 @@
+ng build --configuration production
+
+npx cap sync 
+
+npx cap open android
+
+import type { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  appId: 'com.educenter.app',
+  appName: 'EduCenter',
+  webDir: 'dist/dashboard-app/browser/browser',
+  server: {
+    androidScheme: 'https',
+  }
+};
+
+export default config;
+
+npm uninstall @capacitor/cli @capacitor/core @capacitor/android
+--Java 17
+npm install @capacitor/cli@5.5.1 @capacitor/core@5.5.1 @capacitor/android@5.5.1
+
+ng serve --host 0.0.0.0 --port 4200

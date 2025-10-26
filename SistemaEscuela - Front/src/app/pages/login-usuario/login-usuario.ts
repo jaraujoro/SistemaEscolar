@@ -34,7 +34,7 @@ export class LoginUsuario {
 
   onSubmitLogin() {
     if (this.formControlLogin.invalid) {
-      this.mensajeError = 'Completa todos los campos';
+      this.mensajeError = 'Completa todos los campos.';
       return;
     }
     const { loginUsuario, passwordUsuario } = this.formControlLogin.value;

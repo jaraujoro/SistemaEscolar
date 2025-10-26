@@ -1,4 +1,10 @@
-import { Component, Input, Output, EventEmitter, HostListener } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  HostListener,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
@@ -23,7 +29,7 @@ export class SidebarComponent {
   @Input() isExpanded = false;
   @Input() isMobile = false; // ← Ahora viene del componente padre
   @Output() sidebarToggle = new EventEmitter<void>();
-  
+
   openSubmenu: string | null = null;
 
   navItems: NavItem[] = [
@@ -36,9 +42,9 @@ export class SidebarComponent {
       name: 'Ecommerce',
       icon: '🛒',
       subItems: [
-        { name: 'Products', path: '/EduCenter/usuario' },
-        { name: 'Orders', path: '/EduCenter/orders' },
-        { name: 'Customers', path: '/EduCenter/customers' },
+        { name: 'Usuario', path: '/EduCenter/usuario' },
+        { name: 'Modulo', path: '/EduCenter/modulo' },
+        { name: 'Sub Modulo', path: '/EduCenter/sub-modulo' },
       ],
     },
     {
@@ -58,6 +64,10 @@ export class SidebarComponent {
     if (this.isMobile) {
       this.sidebarToggle.emit();
     }
+  }
+
+  toggleSidebar() {
+    this.isExpanded = !this.isExpanded;
   }
 
   // Método para clicks en items móviles
@@ -84,17 +94,20 @@ export class SidebarComponent {
     if (navItem.path) {
       return this.isActive(navItem.path);
     }
-    
+
     if (navItem.subItems) {
-      return navItem.subItems.some(subItem => this.isSubItemActive(subItem));
+      return navItem.subItems.some((subItem) => this.isSubItemActive(subItem));
     }
-    
+
     return false;
   }
 
   checkActiveSubmenu() {
-    this.navItems.forEach(item => {
-      if (item.subItems && item.subItems.some(sub => this.isSubItemActive(sub))) {
+    this.navItems.forEach((item) => {
+      if (
+        item.subItems &&
+        item.subItems.some((sub) => this.isSubItemActive(sub))
+      ) {
         this.openSubmenu = item.name;
       }
     });
@@ -102,7 +115,7 @@ export class SidebarComponent {
 
   ngOnInit() {
     this.checkActiveSubmenu();
-    
+
     this.router.events.subscribe(() => {
       this.checkActiveSubmenu();
     });

@@ -1,0 +1,80 @@
+<div class="fixed inset-0 flex items-center justify-center bg-black/50 z-50 p-4">
+    <div class="w-full sm:w-1/4 mx-auto" (click)="$event.stopPropagation()">
+        <div class="bg-white rounded-lg shadow-xl max-h-[90vh] overflow-y-auto">
+            <!-- Header -->
+            <div class="flex justify-between items-center p-6 border-b border-gray-200 sticky top-0 bg-white">
+                <h2 class="text-xl font-semibold text-gray-800 flex items-center gap-2">
+                    <i class="fa-solid fa-puzzle-piece text-blue-500"></i>
+                    {{ this.itemListSeleccionado.length == 0 ? 'Nuevo Registro' : 'Editar Registro' }}
+                </h2>
+
+                <button class="text-gray-400 hover:text-gray-600 transition-colors" (click)="cerrarModal()">
+                    <i class="fa-solid fa-close text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Formulario -->
+            <form [formGroup]="formControlModulo" class="p-6 space-y-4">
+                <!-- Nombre del módulo -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Nombre del módulo</label>
+                    <input type="text" formControlName="nombre_modulo" placeholder="Mi Modulo"
+                        class="w-full border border-gray-300 rounded-lg px-3 py-2.5 focus:ring-2 focus:ring-blue-400 focus:border-transparent focus:outline-none placeholder-gray-400 text-sm" />
+                </div>
+
+                <!-- Nivel del módulo -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Nivel del módulo</label>
+                    <select formControlName="nivel_modulo"
+                        class="w-full border border-gray-300 rounded-lg px-3 py-2.5 focus:ring-2 focus:ring-blue-400 focus:border-transparent focus:outline-none text-sm">
+                        <option value="" disabled selected hidden class="text-gray-400">
+                            Seleccione un nivel
+                        </option>
+                        <option value="1">Nivel 1</option>
+                        <option value="2">Nivel 2</option>
+                    </select>
+                </div>
+
+                <!-- URL -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">URL del módulo</label>
+                    <input type="text" formControlName="url_modulo" placeholder="mi-url"
+                        class="w-full border border-gray-300 rounded-lg px-3 py-2.5 focus:ring-2 focus:ring-blue-400 focus:border-transparent focus:outline-none placeholder-gray-400 text-sm" />
+                </div>
+
+                <!-- Icono -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Ícono del módulo</label>
+                    <input type="text" formControlName="icono_modulo"
+                        class="w-full border border-gray-300 rounded-lg px-3 py-2.5 focus:ring-2 focus:ring-blue-400 focus:border-transparent focus:outline-none placeholder-gray-400 text-sm"
+                        placeholder="fa-solid fa-home" />
+                </div>
+
+                <!-- Estado -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Estado</label>
+                    <select formControlName="estado_modulo"
+                        class="w-full border border-gray-300 rounded-lg px-3 py-2.5 focus:ring-2 focus:ring-blue-400 focus:border-transparent focus:outline-none text-sm">
+                        <option value="" disabled selected hidden class="text-gray-400">
+                            Seleccione un estado
+                        </option>
+                        <option value="1">Activo</option>
+                        <option value="0">Inactivo</option>
+                    </select>
+                </div>
+
+                <!-- Botones -->
+                <div class="flex flex-col sm:flex-row justify-end gap-3 pt-4">
+                    <button (click)="cerrarModal()" type="button"
+                        class="w-full sm:w-auto bg-red-500 hover:bg-red-600 text-white text-sm font-medium px-6 py-2.5 rounded-lg shadow-sm transition-colors duration-200">
+                        Cancelar
+                    </button>
+                    <button (click)="onSubmitModulo()" type="button"
+                        class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-6 py-2.5 rounded-lg shadow-sm transition-colors duration-200">
+                        Guardar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

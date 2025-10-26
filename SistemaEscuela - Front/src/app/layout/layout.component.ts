@@ -9,16 +9,15 @@ import { SidebarComponent } from './sidebar/sidebar.component';
   standalone: true,
   imports: [
     CommonModule, // ✅ Añade CommonModule aquí
-    RouterModule, 
-    HeaderComponent, 
-    SidebarComponent
+    RouterModule,
+    HeaderComponent,
+    SidebarComponent,
   ],
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.css'],
 })
 export class LayoutComponent implements OnInit {
-  
-  isSidebarExpanded = false;
+  isSidebarExpanded = true;
   isMobile = false;
 
   @HostListener('window:resize', ['$event'])
@@ -28,7 +27,7 @@ export class LayoutComponent implements OnInit {
 
   checkScreenSize() {
     this.isMobile = window.innerWidth < 1024; // lg breakpoint
-    
+
     if (!this.isMobile) {
       // En desktop: sidebar siempre expandido
       this.isSidebarExpanded = true;
@@ -44,5 +43,10 @@ export class LayoutComponent implements OnInit {
 
   ngOnInit() {
     this.checkScreenSize();
+    window.addEventListener('resize', () => this.checkScreenSize());
+  }
+
+  ngOnDestroy() {
+    window.removeEventListener('resize', () => this.checkScreenSize());
   }
 }
