@@ -22,3 +22,5 @@ npm uninstall @capacitor/cli @capacitor/core @capacitor/android
 npm install @capacitor/cli@5.5.1 @capacitor/core@5.5.1 @capacitor/android@5.5.1
 
 ng serve --host 0.0.0.0 --port 4200
+
+ng serve --ssl --host 0.0.0.0 --port 4200

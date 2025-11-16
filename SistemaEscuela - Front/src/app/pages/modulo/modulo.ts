@@ -21,7 +21,7 @@ export class ModuloComponent implements OnInit {
   cargandoListado: boolean = true;
   listDataModulo: any;
   itemListSeleccionado: any;
-  inputSearchValue : string = "";
+  inputSearchValue: string = '';
 
   constructor(
     private moduloService: ModuloService,
@@ -44,7 +44,10 @@ export class ModuloComponent implements OnInit {
   async listarModuloComponent() {
     try {
       this.cargandoListado = true;
-      const response = await this.moduloService.listarModuloService(this.inputSearchValue);
+      const dataPost = {
+        where: this.inputSearchValue,
+      };
+      const response = await this.moduloService.listarModuloService(dataPost);
       this.listDataModulo = response;
       this.cargandoListado = false;
     } catch (error) {
@@ -57,11 +60,12 @@ export class ModuloComponent implements OnInit {
     try {
       const result = await this.sweetAlert.confirm();
       if (result.isConfirmed) {
+        const dataPost = { id_modulo: id_modulo };
         const response: any = await this.moduloService.eliminarModuloService(
-          id_modulo
+          dataPost
         );
         if (response.o_nres == 1) {
-          this.sweetAlert.success('Módulo eliminado correctamente.');
+          this.sweetAlert.success('Registro eliminado correctamente.');
           this.listarModuloComponent();
         } else {
           this.sweetAlert.error('Error al eliminar: ' + response.o_msj);

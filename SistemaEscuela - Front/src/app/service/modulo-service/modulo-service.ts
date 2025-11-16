@@ -19,12 +19,8 @@ export class ModuloService {
     return this.httpClient.post(url, dataPost).toPromise();
   }
 
-  listarModuloService(where : string) {
-    const url = this.apiUrl + '/listado-modulo';
-    const dataPost = {
-      where: where,
-    };
-    console.log(dataPost);
+  listarModuloService(dataPost: any) {
+    const url = this.apiUrl + '/listado-modulo';  
     return this.httpClient.post(url, dataPost).toPromise();
   }
 
